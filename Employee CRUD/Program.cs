@@ -2,6 +2,8 @@
 using EmployeeApp.DAL.Context;
 using EmployeeApp.DAL.Infrastructure;
 using EmployeeApp.DAL.Repositories;
+using EmpolyeeApp.business.Contracts;
+using EmpolyeeApp.business.Managers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Employee_CRUD
@@ -12,18 +14,15 @@ namespace Employee_CRUD
         {
             var builder = WebApplication.CreateBuilder(args);
 
-   
-
-
             #region Injection Dependence Configuration
 
             // Register EmployeeRepo Repositories
             builder.Services.AddScoped<IEmpolyeeRepo, EmpolyeeRepo>();
+            builder.Services.AddScoped<IEmployeeManager, EmployeManager>();
 
             #endregion
 
             builder.Services.AddControllers();
-
 
             #region Make_connectionstring
 
