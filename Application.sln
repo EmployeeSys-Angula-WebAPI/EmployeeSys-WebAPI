@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeApp.Domain", "Emplo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeApp.DAL", "EmployeeApp.DAL\EmployeeApp.DAL.csproj", "{CEF9F010-4B20-448C-A030-CF87BEE2E9C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmpolyeeApp.business", "EmpolyeeApp.business\EmpolyeeApp.business.csproj", "{19DF5EF1-BC98-4879-B111-3E64AB092440}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CEF9F010-4B20-448C-A030-CF87BEE2E9C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEF9F010-4B20-448C-A030-CF87BEE2E9C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEF9F010-4B20-448C-A030-CF87BEE2E9C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19DF5EF1-BC98-4879-B111-3E64AB092440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19DF5EF1-BC98-4879-B111-3E64AB092440}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19DF5EF1-BC98-4879-B111-3E64AB092440}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19DF5EF1-BC98-4879-B111-3E64AB092440}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

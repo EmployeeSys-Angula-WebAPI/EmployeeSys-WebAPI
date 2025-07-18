@@ -1,4 +1,9 @@
 
+using EmployeeApp.DAL.Context;
+using EmployeeApp.DAL.Infrastructure;
+using EmployeeApp.DAL.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 namespace Employee_CRUD
 {
     public class Program
@@ -7,9 +12,33 @@ namespace Employee_CRUD
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+   
+
+
+            #region Injection Dependence Configuration
+
+            // Register EmployeeRepo Repositories
+            builder.Services.AddScoped<IEmpolyeeRepo, EmpolyeeRepo>();
+
+            #endregion
 
             builder.Services.AddControllers();
+
+
+            #region Make_connectionstring
+
+            var ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<ApplicationDbContext>(
+                options =>
+                {
+                    options
+                        .UseSqlServer(ConnectionString) 
+                        .LogTo(Console.WriteLine, LogLevel.Warning);
+                }
+            );
+
+            #endregion
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
