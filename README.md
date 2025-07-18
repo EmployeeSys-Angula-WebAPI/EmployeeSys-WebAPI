@@ -40,11 +40,6 @@ The solution is organized into 4 layers:
 - git clone git@github.com:EmployeeSys-Angula-WebAPI/EmployeeSys-WebAPI.git
 - cd EmployeeApp
 
-### 1 . Clone the Repository
-
-- git clone git@github.com:EmployeeSys-Angula-WebAPI/EmployeeSys-WebAPI.git
-- cd EmployeeApp
-
 ### 2 . Navigate to the API Project Folder
 
 - cd Employee_CRUD
