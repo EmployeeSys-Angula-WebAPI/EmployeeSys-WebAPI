@@ -1,0 +1,19 @@
+# Ignore build output folders
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore Rider/JetBrains IDE folders
+.idea/
+
+# Ignore temporary files
+*.log
+*.tmp
+
+# Ignore OS-specific files
+Thumbs.db
+.DS_Store
