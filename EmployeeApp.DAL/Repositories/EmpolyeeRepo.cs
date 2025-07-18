@@ -6,9 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeApp.DAL.Repositories;
 
-public class EmpolyeeRepo(ApplicationDbContext context) : IEmpolyeeRepo
+public class EmpolyeeRepo : IEmpolyeeRepo
 {
-    private readonly ApplicationDbContext _context = context;
+    private readonly ApplicationDbContext _context ;
+    public EmpolyeeRepo(ApplicationDbContext context)
+    {
+        _context = context;
+    }
 
     public async Task<Employee> CreateEmpAsync(Employee entity)
     {

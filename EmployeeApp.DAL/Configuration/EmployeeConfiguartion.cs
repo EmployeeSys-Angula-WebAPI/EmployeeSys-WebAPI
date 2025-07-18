@@ -14,11 +14,11 @@ public class EmployeeConfiguartion : IEntityTypeConfiguration<Employee>
 
         builder.Property(e => e.FirstName)
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(50);
 
         builder.Property(e => e.LastName)
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(50);
 
         builder.Property(e => e.Email)
             .IsRequired()

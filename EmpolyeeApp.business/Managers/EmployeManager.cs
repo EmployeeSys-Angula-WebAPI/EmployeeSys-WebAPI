@@ -1,35 +1,51 @@
 ﻿using EmployeeApp.DAL.Infrastructure;
 using EmployeeApp.Domain;
 using EmpolyeeApp.business.Contracts;
-using System.Diagnostics;
-using FuzzySharp;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace EmpolyeeApp.business.Managers
 {
-    public class EmployeManager(IEmpolyeeRepo repo) : IEmployeeManager
+    public class EmployeManager : IEmployeeManager
     {
-        private readonly IEmpolyeeRepo _repo = repo;
-
-        
-
-        public Task<Employee> CreateEmpAsync(Employee entity) => _repo.CreateEmpAsync(entity);
-  
-
-        public Task<bool> DeleteAsync(int id)  => _repo.DeleteAsync(id);
-      
-
-        public Task<IReadOnlyList<Employee>> GetAllEmployeesAsync() => _repo.GetAllEmployeesAsync();
-
-
-        public Task<Employee?> GetEmployeeIdAsync(int id) => _repo.GetEmployeeIdAsync(id);
-
-
-        public Task<Employee> UpdatedAsync(Employee entity) => _repo.UpdatedAsync(entity);
-
-        public async Task<List<Employee>> FuzzySearchEmployeesAsync(string name)
+        private readonly IEmpolyeeRepo _repo;
+        public EmployeManager(IEmpolyeeRepo repo)
         {
-            var allEmployees = (await _repo.GetAllEmployeesAsync()).ToList();
+            _repo = repo;
+        }
+
+
+        public async Task<EmpDTO> CreateEmpAsync(EmpDTO dto)
+        {
+            var entity = dto.ToEntity();
+            var created = await _repo.CreateEmpAsync(entity);
+            return created.ToDTO();
+        }
+
+        public Task<bool> DeleteAsync(int id) => _repo.DeleteAsync(id);
+
+        public async Task<IReadOnlyList<EmpDTO>> GetAllEmployeesAsync()
+        {
+            var employees = await _repo.GetAllEmployeesAsync();
+            return employees.ToDTOList();
+        }
+
+        public async Task<EmpDTO?> GetEmployeeIdAsync(int id)
+        {
+            var employee = await _repo.GetEmployeeIdAsync(id);
+            return employee?.ToDTO();
+        }
+
+        public async Task<EmpDTO> UpdatedAsync(EmpDTO dto)
+        {
+            var entity = dto.ToEntity();
+            var updated = await _repo.UpdatedAsync(entity);
+            return updated.ToDTO();
+        }
+
+        public async Task<List<EmpDTO>> FuzzySearchEmployeesAsync(string name)
+        {
+            var allEmployees = (await GetAllEmployeesAsync()).ToList();
 
             var fullNames = allEmployees
                 .Select(e => $"{e.FirstName} {e.LastName}")
@@ -46,5 +62,8 @@ namespace EmpolyeeApp.business.Managers
 
             return matchedEmployees;
         }
+
+        public async Task<bool> ExistsAsync(int id) => await _repo.GetEmployeeIdAsync(id) is not  null;
+       
     }
 }
