@@ -32,6 +32,25 @@ namespace Employee_CRUD.Controllers
             if (emp is null) return NotFound();
             return Ok(emp);
         }
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] EmployeeActionRequest request)
+        {
+            if (request == null)
+                return BadRequest("Request body cannot be null.");
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var dto = request.ToEmpDTO();
+
+            var created = await _manager.CreateEmpAsync(dto);
+
+            if (created == null)
+                return StatusCode(500, "An error occurred while creating the employee.");
+
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+        }
+
 
         // POST: api/employees
         [HttpPut("{id:int}")]

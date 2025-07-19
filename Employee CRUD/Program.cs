@@ -39,6 +39,19 @@ namespace Employee_CRUD
             #endregion
 
 
+            #region CORS Configuration
+            builder.Services.AddCors(options =>
+              {
+                  options.AddPolicy("AllowFrontend",
+                      builder =>
+                      {
+                          builder.WithOrigins("http://localhost:4200")
+                                 .AllowAnyHeader()
+                                 .AllowAnyMethod();
+                      });
+              }); 
+            #endregion
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -60,6 +73,7 @@ namespace Employee_CRUD
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors("AllowFrontend");
 
             app.UseHttpsRedirection();
 
